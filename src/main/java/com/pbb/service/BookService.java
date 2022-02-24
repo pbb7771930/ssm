@@ -1,9 +1,12 @@
 package com.pbb.service;
 
 import com.pbb.pojo.Books;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface BookService {
+
     //增加一个Book
     int addBook(Books book);
     //根据id删除一个Book

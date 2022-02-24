@@ -7,18 +7,18 @@
 <!-- 1、 注册DispatcherServlet  -->
 
     <servlet>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>SpringMVC</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!--关联一个springmvc的配置文件:【servlet-name】-servlet.xml-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
+            <param-value>classpath:applicationContext.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>SpringMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
@@ -38,7 +38,7 @@
     </filter-mapping>
 
     <session-config>
-        <session-timeout>15</session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
     
 </web-app>

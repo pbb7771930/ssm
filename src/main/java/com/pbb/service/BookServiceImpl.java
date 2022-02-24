@@ -2,8 +2,11 @@ package com.pbb.service;
 
 import com.pbb.dao.BookMapper;
 import com.pbb.pojo.Books;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public class BookServiceImpl implements BookService{
 
