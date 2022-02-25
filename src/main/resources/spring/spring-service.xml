@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd
-   http://www.springframework.org/schema/context
-   http://www.springframework.org/schema/context/spring-context.xsd">
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		https://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Spring整合service层 -->
 
@@ -24,5 +30,28 @@
         <!-- 注入数据库连接池 -->
         <property name="dataSource" ref="dataSource" />
     </bean>
+
+    <!--  结合AOP实现事务的植入  -->
+    <!--配置事务通知-->
+    <tx:advice id="txAvice" transaction-manager="transactionManager">
+        <!--   给哪些方法配置事务     -->
+        <!--   配置事务的传播特性  new propagation  name=* ,则所有的方法添加事务 -->
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置aop切入点-->
+    <aop:config>
+        <!--切入点：expression:表达式，execution（要执行的位置）-->
+        <!--com.pbb.dao.*.*(..)) -》 该包下类下的所以方法(参数)-->
+        <aop:pointcut id="txPointCut" expression="execution(* com.pbb.dao.*.*(..))"/>
+
+        <!--执行环绕增加-->
+        <aop:advisor advice-ref="txAvice" pointcut-ref="txPointCut"/>
+
+        <!-- 环绕,在id="pointcut"的前后切入 -->
+<!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+    </aop:config>
 
 </beans>

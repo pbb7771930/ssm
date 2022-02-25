@@ -41,7 +41,7 @@ public class BookController {
     public String addPaper(Books books) {
         System.out.println(books);
         bookService.addBook(books);
-        return "redirect:/book/allBook";
+        return "redirect:/book/allBook"; //重定向到 @RequestMapping("/allBook") 这个请求
     }
 
     /*
