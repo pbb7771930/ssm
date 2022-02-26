@@ -18,4 +18,7 @@ public interface BookService {
     //查询全部Book,返回list集合
     List<Books> queryAllBook();
 
+    //通过书名查询Book
+    Books queryBookByName(String bookName);
+
 }

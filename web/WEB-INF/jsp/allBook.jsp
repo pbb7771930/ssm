@@ -23,7 +23,16 @@
 
     <div class="row">
         <div class="col-md-4 column">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/toAddBook">新增</a>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/toAddBook">新增书籍</a>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/allBook">显示全部书籍</a>
+        </div>
+        <div class="col-md-4 column">
+            <%-- 查询书籍的搜索框 --%>
+            <form class="form-inline" action="${pageContext.request.contextPath}/book/queryBook" method="post" style="float: right">
+                <span style="color: red;" >${error}</span>
+                <input type="text" name="queryBookName" class="form-control" placeholder="请输入要查询的书籍名称">
+                <input type="submit" value="查询" class="btn btn-primary">
+            </form>
         </div>
     </div>
 
@@ -38,8 +47,8 @@
                     <th>书籍详情</th>
                     <th>操作</th>
                 </tr>
-                </thead>
 
+                <%-- 书籍从数据库中查询出来，从这个list中遍历出来  --%>
                 <tbody>
                 <c:forEach var="book" items="${requestScope.get('list')}">
                     <tr>

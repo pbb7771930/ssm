@@ -34,4 +34,10 @@
         SELECT * from ssm.books
     </select>
 
+    <!--  通过书名查询Books  -->
+    <select id="queryBookByName"  resultType="Books" >
+        select * from ssm.books
+        where bookName = #{bookName}
+    </select>
+
 </mapper>
